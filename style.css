@@ -1,0 +1,342 @@
+/* RESET E ESTILOS BASE */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    background-color: #000000;
+    color: #ffffff;
+    min-height: 100vh;
+    overflow-x: hidden;
+    perspective: 1000px;
+}
+
+/* PALETA DE CORES (Degradê de 3 cores: Magenta, Roxo e Ciano) */
+:root {
+    --color-1: #ff007f; /* Magenta Neon */
+    --color-2: #7928ca; /* Roxo Profundo */
+    --color-3: #00dfd8; /* Ciano Brilhante */
+    --grad-3d: linear-gradient(135deg, var(--color-1), var(--color-2), var(--color-3));
+}
+
+/* CONTAINER PRINCIPAL */
+.main-container {
+    position: relative;
+    z-index: 10;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+/* HEADER TRIDIMENSIONAL */
+.header-3d {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.glitch-title {
+    font-size: 3.5rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+    background: var(--grad-3d);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 10px 20px rgba(121, 40, 202, 0.4);
+    transform: translateZ(30px);
+}
+
+.glitch-title span {
+    color: #fff;
+    -webkit-text-fill-color: #fff;
+    border: 2px solid var(--color-3);
+    padding: 2px 10px;
+    border-radius: 8px;
+    font-size: 2rem;
+    vertical-align: middle;
+}
+
+.subtitle {
+    color: #a0a0a0;
+    font-size: 1.2rem;
+    margin-top: 10px;
+}
+
+/* GRID DE CARDS */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+/* CARD 3D E EFECTO HOVER */
+.card-3d {
+    background: linear-gradient(135deg, rgba(255, 0, 127, 0.15), rgba(121, 40, 202, 0.15), rgba(0, 223, 216, 0.15));
+    border-radius: 20px;
+    padding: 2px; /* Borda gradiente */
+    cursor: pointer;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+    transform-style: preserve-3d;
+}
+
+.card-3d:hover {
+    transform: translateY(-12px) rotateX(6deg) rotateY(-4deg) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0, 223, 216, 0.25), 0 0 30px rgba(255, 0, 127, 0.2);
+}
+
+.card-glass {
+    background: rgba(15, 15, 20, 0.9);
+    backdrop-filter: blur(15px);
+    border-radius: 18px;
+    padding: 30px 25px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card-icon {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    filter: drop-shadow(0 5px 15px rgba(255, 255, 255, 0.2));
+}
+
+.card-glass h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #ffffff;
+}
+
+.card-glass p {
+    color: #b0b0b0;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+.btn-details {
+    background: transparent;
+    border: 1px solid var(--color-3);
+    color: var(--color-3);
+    padding: 10px 18px;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    align-self: flex-start;
+}
+
+.card-3d:hover .btn-details {
+    background: var(--grad-3d);
+    color: #fff;
+    border-color: transparent;
+    box-shadow: 0 5px 15px rgba(121, 40, 202, 0.5);
+}
+
+/* OBJETOS 3D VOANDO AO FUNDO */
+.bg-3d-scene {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.floating-shape {
+    position: absolute;
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+    background: var(--grad-3d);
+    opacity: 0.35;
+    filter: blur(20px);
+    animation: floatAnimation 12s infinite ease-in-out alternate;
+}
+
+/* Formas individuais com tamanhos e trajetórias diferentes */
+.cube-1 {
+    width: 250px;
+    height: 250px;
+    top: 10%;
+    left: 5%;
+    animation-duration: 14s;
+}
+
+.pyramid-1 {
+    width: 350px;
+    height: 350px;
+    top: 60%;
+    right: -50px;
+    animation-duration: 18s;
+    animation-delay: -3s;
+}
+
+.torus-1 {
+    width: 180px;
+    height: 180px;
+    bottom: 10%;
+    left: 20%;
+    animation-duration: 10s;
+    animation-delay: -5s;
+}
+
+.sphere-1 {
+    width: 300px;
+    height: 300px;
+    top: -50px;
+    right: 20%;
+    animation-duration: 16s;
+}
+
+.cube-2 {
+    width: 150px;
+    height: 150px;
+    top: 45%;
+    left: 45%;
+    animation-duration: 22s;
+    animation-delay: -7s;
+}
+
+.sphere-2 {
+    width: 200px;
+    height: 200px;
+    bottom: 25%;
+    right: 35%;
+    animation-duration: 13s;
+}
+
+@keyframes floatAnimation {
+    0% {
+        transform: translateY(0) rotate(0deg) scale(1) translateZ(-100px);
+    }
+    50% {
+        transform: translateY(-50px) rotate(180deg) scale(1.2) translateZ(50px);
+    }
+    100% {
+        transform: translateY(40px) rotate(360deg) scale(0.9) translateZ(-50px);
+    }
+}
+
+/* EFEITO MODAL */
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(10px);
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.modal-backdrop.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-card-3d {
+    background: #0f0f15;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 50px rgba(121, 40, 202, 0.4), 0 0 30px rgba(0, 223, 216, 0.2);
+    width: 90%;
+    max-width: 550px;
+    border-radius: 24px;
+    padding: 35px;
+    position: relative;
+    transform: scale(0.7) rotateX(-20deg);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.modal-backdrop.active .modal-card-3d {
+    transform: scale(1) rotateX(0deg);
+}
+
+.modal-close {
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    background: none;
+    border: none;
+    color: #a0a0a0;
+    font-size: 2rem;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.modal-close:hover {
+    color: var(--color-1);
+}
+
+.modal-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.modal-icon {
+    font-size: 2.5rem;
+}
+
+.modal-header h2 {
+    font-size: 1.8rem;
+    background: var(--grad-3d);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.modal-body p {
+    color: #cccccc;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.modal-body h4 {
+    color: #ffffff;
+    margin: 15px 0 10px 0;
+}
+
+.task-list {
+    list-style: none;
+    margin-bottom: 25px;
+}
+
+.task-list li {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 10px 15px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    border-left: 3px solid var(--color-3);
+    font-size: 0.95rem;
+}
+
+.progress-bar-bg {
+    width: 100%;
+    height: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    overflow: hidden;
+    margin-bottom: 8px;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background: var(--grad-3d);
+    width: 0%;
+    transition: width 0.6s ease;
+}
+
+.goal-text {
+    font-size: 0.85rem;
+    color: var(--color-3);
+    text-align: right;
+}
