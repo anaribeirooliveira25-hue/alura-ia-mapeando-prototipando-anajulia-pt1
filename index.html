@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHRONOS // Organizador de Rotinas 3D</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Fundo Tridimensional com Objetos Voando -->
+    <div class="bg-3d-scene">
+        <div class="floating-shape cube-1"></div>
+        <div class="floating-shape pyramid-1"></div>
+        <div class="floating-shape torus-1"></div>
+        <div class="floating-shape sphere-1"></div>
+        <div class="floating-shape cube-2"></div>
+        <div class="floating-shape sphere-2"></div>
+    </div>
+
+    <!-- Conteúdo Principal -->
+    <div class="main-container">
+        <header class="header-3d">
+            <h1 class="glitch-title">CHRONOS <span>3D</span></h1>
+            <p class="subtitle">Gestão Temporal & Equilíbrio de Vida</p>
+        </header>
+
+        <!-- Grid de Cards das Rotinas -->
+        <main class="card-grid">
+
+            <!-- Card: Estudo -->
+            <article class="card-3d" onclick="openModal('estudo')">
+                <div class="card-glass">
+                    <div class="card-icon">📚</div>
+                    <h3>Estudos & Aprendizado</h3>
+                    <p>Foco contínuo, leitura, cursos e aperfeiçoamento intelectual.</p>
+                    <button class="btn-details">Ver Detalhes ➜</button>
+                </div>
+            </article>
+
+            <!-- Card: Trabalho -->
+            <article class="card-3d" onclick="openModal('trabalho')">
+                <div class="card-glass">
+                    <div class="card-icon">💼</div>
+                    <h3>Trabalho & Carreira</h3>
+                    <p>Projetos profissionais, metas, reuniões e produtividade diária.</p>
+                    <button class="btn-details">Ver Detalhes ➜</button>
+                </div>
+            </article>
+
+            <!-- Card: Lazer -->
+            <article class="card-3d" onclick="openModal('lazer')">
+                <div class="card-glass">
+                    <div class="card-icon">🎬</div>
+                    <h3>Lazer & Entretenimento</h3>
+                    <p>Descanso, filmes, jogos, descanso mental e passeios.</p>
+                    <button class="btn-details">Ver Detalhes ➜</button>
+                </div>
+            </article>
+
+            <!-- Card: Hobby -->
+            <article class="card-3d" onclick="openModal('hobby')">
+                <div class="card-glass">
+                    <div class="card-icon">🎨</div>
+                    <h3>Hobbies & Criatividade</h3>
+                    <p>Pintura, música, escrita, artes e expressão pessoal.</p>
+                    <button class="btn-details">Ver Detalhes ➜</button>
+                </div>
+            </article>
+
+            <!-- Card: Esportes -->
+            <article class="card-3d" onclick="openModal('esportes')">
+                <div class="card-glass">
+                    <div class="card-icon">⚡</div>
+                    <h3>Esportes & Exercícios</h3>
+                    <p>Academia, corrida, artes marciais e condicionamento físico.</p>
+                    <button class="btn-details">Ver Detalhes ➜</button>
+                </div>
+            </article>
+
+            <!-- Card: Saúde -->
+            <article class="card-3d" onclick="openModal('saude')">
+                <div class="card-glass">
+                    <div class="card-icon">🩺</div>
+                    <h3>Saúde & Bem-Estar</h3>
+                    <p>Alimentação, meditação, sono reparador e rotina médica.</p>
+                    <button class="btn-details">Ver Detalhes ➜</button>
+                </div>
+            </article>
+
+        </main>
+    </div>
+
+    <!-- Modal para Detalhes da Rotina -->
+    <div id="routineModal" class="modal-backdrop" onclick="closeModalOnBackdrop(event)">
+        <div class="modal-card-3d">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <div class="modal-header">
+                <span id="modalIcon" class="modal-icon"></span>
+                <h2 id="modalTitle">Título da Rotina</h2>
+            </div>
+            <div class="modal-body">
+                <p id="modalDescription"></p>
+                
+                <h4>📋 Tarefas e Hábitos Diários:</h4>
+                <ul id="modalTasks" class="task-list"></ul>
+
+                <h4>⏱️ Meta Semanal Recomendada:</h4>
+                <div class="progress-bar-bg">
+                    <div id="modalProgress" class="progress-bar-fill"></div>
+                </div>
+                <p id="modalGoal" class="goal-text"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Integrado -->
+    <script>
+        // Dados das rotinas
+        const routinesData = {
+            estudo: {
+                title: "Estudos & Aprendizado",
+                icon: "📚",
+                description: "Desenvolva novas habilidades através da leitura diária, resolução de problemas e técnicas de estudo focado (Pomodoro).",
+                tasks: [
+                    "Leitura técnica (30 min)",
+                    "Cursos online / Aulas (1 hora)",
+                    "Revisão com Flashcards",
+                    "Anotações de insights diários"
+                ],
+                goal: "14 Horas / Semana",
+                progress: "75%"
+            },
+            trabalho: {
+                title: "Trabalho & Carreira",
+                icon: "💼",
+                description: "Maximize sua eficiência profissional gerenciando tarefas prioritárias, mantendo a comunicação clara e entregas no prazo.",
+                tasks: [
+                    "Planejamento matinal de tarefas (Deep Work)",
+                    "Responder e-mails e mensagens chave",
+                    "Execução dos blocos de trabalho focado",
+                    "Revisão de metas de médio prazo"
+                ],
+                goal: "40 Horas / Semana",
+                progress: "90%"
+            },
+            lazer: {
+                title: "Lazer & Entretenimento",
+                icon: "🎬",
+                description: "Momento sagrado para desconectar a mente do trabalho, evitar o burnout e recarregar as energias com quem você ama.",
+                tasks: [
+                    "Assistir a um filme ou episódio de série",
+                    "Conversar com amigos / família",
+                    "Desconexão total das telas à noite",
+                    "Passeios ao ar livre no fim de semana"
+                ],
+                goal: "10 Horas / Semana",
+                progress: "60%"
+            },
+            hobby: {
+                title: "Hobbies & Criatividade",
+                icon: "🎨",
+                description: "Explore a criatividade sem pressão por resultados. Atividades puramente voltadas para a satisfação pessoal.",
+                tasks: [
+                    "Prática musical / Desenho / Pintura",
+                    "Escrita criativa ou diário pessoal",
+                    "Culinária experimental",
+                    "Colecionismo ou Jardinagem"
+                ],
+                goal: "6 Horas / Semana",
+                progress: "50%"
+            },
+            esportes: {
+                title: "Esportes & Exercícios",
+                icon: "⚡",
+                description: "Mantenha o corpo forte e a mente limpa. Atividade física regular previne doenças e dispara dopamina e endorfina.",
+                tasks: [
+                    "Treino de musculação ou calistenia",
+                    "Corrida ou caminhada cardiovascular",
+                    "Alongamento mobilidade articular",
+                    "Hidratação intensa pós-treino"
+                ],
+                goal: "5 Dias / Semana",
+                progress: "80%"
+            },
+            saude: {
+                title: "Saúde & Bem-Estar",
+                icon: "🩺",
+                description: "Cuidado holístico do organismo: nutrição adequada, rotina de sono consistente e preservação da saúde mental.",
+                tasks: [
+                    "Consumo de 3L de água diários",
+                    "Dormir de 7h a 8h por noite",
+                    "Meditação ou respiração guiada (10 min)",
+                    "Alimentação limpa rica em nutrientes"
+                ],
+                goal: "Hábito Contínuo 24/7",
+                progress: "85%"
+            }
+        };
+
+        const modal = document.getElementById('routineModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalIcon = document.getElementById('modalIcon');
+        const modalDescription = document.getElementById('modalDescription');
+        const modalTasks = document.getElementById('modalTasks');
+        const modalProgress = document.getElementById('modalProgress');
+        const modalGoal = document.getElementById('modalGoal');
+
+        function openModal(key) {
+            const data = routinesData[key];
+            if (!data) return;
+
+            modalIcon.textContent = data.icon;
+            modalTitle.textContent = data.title;
+            modalDescription.textContent = data.description;
+            modalGoal.textContent = data.goal;
+            modalProgress.style.width = data.progress;
+
+            // Preenche lista de tarefas
+            modalTasks.innerHTML = '';
+            data.tasks.forEach(task => {
+                const li = document.createElement('li');
+                li.textContent = task;
+                modalTasks.appendChild(li);
+            });
+
+            modal.classList.add('active');
+        }
+
+        function closeModal() {
+            modal.classList.remove('active');
+        }
+
+        function closeModalOnBackdrop(event) {
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+
+        // Fechar modal com a tecla ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
